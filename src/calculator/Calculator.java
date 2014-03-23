@@ -15,7 +15,7 @@ import java.awt.event.*;
 public class Calculator {
     JTextArea field;
     String button = "",s = "";
-    double value = 0.0, summ = 0.0;
+    double value = 0.0, summ = 0.0, temp = 0.0;
     /**
      * @param args the command line arguments
      */
@@ -111,26 +111,42 @@ public class Calculator {
     frame.setResizable(false);
     frame.setLocation(200,200);
     }
-    
+    public void minus(){
+        if (button == "") {} else {
+            value = Double.parseDouble(button);            
+            summ = summ - value;
+            s += summ;
+            field.setText(s);
+            button = "";
+            s = "";
+        }
+    }
     public void plus(){
         if (button == ""){} else {
-            value = Double.parseDouble(button);            
+            value = Double.parseDouble(button);  
+            temp = value;
             summ += value;
             s += summ;
             field.setText(s);
-            button = "";}
+            button = "";
             s = "";
+        }
     }
     public void equal(){
         if (button == "") {} else {
             value = Double.parseDouble(button);            
             summ += value;
             s += summ;
-            
             field.setText(s);
             button = "";
             s = "";
             summ = 0.0;
+        }
+    }
+    class minusActionListener implements ActionListener{
+        
+        public void actionPerformed(ActionEvent event){
+            minus();
         }
     }
     class ButtonActionListener implements ActionListener{
