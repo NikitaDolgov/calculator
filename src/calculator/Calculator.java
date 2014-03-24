@@ -14,8 +14,8 @@ import java.awt.event.*;
  */
 public class Calculator {
     JTextArea field;
-    String button = "",s = "";
-    double value = 0.0, summ = 0.0, temp = 0.0;
+    String button = "",s = "", temp = null;
+    double value = 0.0, summ = 0.0;
     /**
      * @param args the command line arguments
      */
@@ -54,7 +54,7 @@ public class Calculator {
     JButton equals = new JButton("=");
     equals.addActionListener(new equalsActionListener());
     JButton minus = new JButton("-");
-    //minus.addActionListnere(new minusActionListener());
+    minus.addActionListener(new minusActionListener());
     JButton multiply = new JButton("*");
     //multiply.addActionListener(new multiplyActionListener());
     JButton divide = new JButton("/");
@@ -111,25 +111,65 @@ public class Calculator {
     frame.setResizable(false);
     frame.setLocation(200,200);
     }
-    public void minus(){
-        if (button == "") {} else {
-            value = Double.parseDouble(button);            
-            summ = summ - value;
-            s += summ;
-            field.setText(s);
-            button = "";
-            s = "";
+    public void minus(){        
+        if (button != "") {
+            if (temp == "+"){
+                value = Double.parseDouble(button);
+                summ += value;
+                s += summ;
+                field.setText(s);
+                button = "";
+                s = "";
+                temp = "-";
+            } 
+            if (temp == "-"){
+                value = Double.parseDouble(button);
+                summ -= value;
+                s += summ;
+                field.setText(s);
+                button = "";
+                s = "";
+            } 
+            if (temp == null){
+                value = Double.parseDouble(button);
+                summ += value;
+                s += summ;
+                field.setText(s);
+                button = "";
+                s = "";
+                temp = "-";  
+            }
         }
     }
     public void plus(){
-        if (button == ""){} else {
-            value = Double.parseDouble(button);  
-            temp = value;
+        
+        if (button != ""){ 
+            if (temp == "+"){
+            value = Double.parseDouble(button);
             summ += value;
             s += summ;
             field.setText(s);
             button = "";
             s = "";
+            } 
+            if (temp == "-"){
+                value = Double.parseDouble(button);
+                summ -= value;
+                s += value;
+                field.setText(s);
+                button = "";
+                s = "";
+                temp = "+";
+            } 
+            if (temp == null){
+                value = Double.parseDouble(button);
+                summ += value;
+                s += value;
+                field.setText(s);
+                button = "";
+                s = "";
+                temp = "+";
+            }
         }
     }
     public void equal(){
