@@ -12,9 +12,15 @@ import java.awt.event.*;
  *
  * @author Nikita
  */
+
+/*
+Errors:
+Doesn't change the sign ( "+" "-" will be "+")
+
+*/
 public class Calculator {
     JTextArea field;
-    String button = "",s = "", temp = null;
+    String button = "",s = "", temp = "null";
     double value = 0.0, summ = 0.0;
     /**
      * @param args the command line arguments
@@ -111,76 +117,96 @@ public class Calculator {
     frame.setResizable(false);
     frame.setLocation(200,200);
     }
-    public void minus(){        
-        if (button != "") {
-            if (temp == "+"){
-                value = Double.parseDouble(button);
-                summ += value;
-                s += summ;
-                field.setText(s);
-                button = "";
-                s = "";
-                temp = "-";
-            } 
-            if (temp == "-"){
-                value = Double.parseDouble(button);
-                summ -= value;
-                s += summ;
-                field.setText(s);
-                button = "";
-                s = "";
-            } 
-            if (temp == null){
-                value = Double.parseDouble(button);
-                summ += value;
-                s += summ;
-                field.setText(s);
-                button = "";
-                s = "";
-                temp = "-";  
-            }
-        }
+    public void minus(){ 
+        if (button != ""){
+        switch (temp){
+           case "null":
+               temp = "-";
+               value = Double.parseDouble(button);
+               summ = value;
+               s += summ;
+               field.setText(s);
+               button = "";
+               s = "";
+               break;
+           case "-":
+               value = Double.parseDouble(button);
+               summ -= value;
+               s += summ;
+               field.setText(s);               
+               button ="";
+               s = "";
+               break;
+           case "+":
+               temp = "-";
+               value = Double.parseDouble(button);
+               summ += value;
+               s += summ;
+               field.setText(s);
+               button = "";
+               s = "";
+               break;
+       }
+       }
     }
     public void plus(){
-        
-        if (button != ""){ 
-            if (temp == "+"){
-            value = Double.parseDouble(button);
-            summ += value;
-            s += summ;
-            field.setText(s);
-            button = "";
-            s = "";
-            } 
-            if (temp == "-"){
-                value = Double.parseDouble(button);
-                summ -= value;
-                s += value;
-                field.setText(s);
-                button = "";
-                s = "";
-                temp = "+";
-            } 
-            if (temp == null){
-                value = Double.parseDouble(button);
-                summ += value;
-                s += value;
-                field.setText(s);
-                button = "";
-                s = "";
-                temp = "+";
-            }
-        }
+       if (button != ""){
+       switch (temp){
+           case "null":
+               temp = "+";
+               value = Double.parseDouble(button);
+               summ = value;
+               s += summ;
+               field.setText(s);
+               button = "";
+               s = "";
+               break;
+           case "+":
+               value = Double.parseDouble(button);
+               summ += value;
+               s += summ;
+               field.setText(s);               
+               button ="";
+               s = "";
+               break;
+           case "-":
+               temp = "+";
+               value = Double.parseDouble(button);
+               summ -= value;
+               s += summ;
+               field.setText(s);
+               button = "";
+               s = "";
+               break;
+       }
+       }
     }
     public void equal(){
-        if (button == "") {} else {
-            value = Double.parseDouble(button);            
-            summ += value;
-            s += summ;
-            field.setText(s);
-            button = "";
-            s = "";
-            summ = 0.0;
+        if (button != ""){
+           switch (temp){
+           case "null":               
+               break;
+           case "+":
+               value = Double.parseDouble(button);
+               summ += value;
+               s += summ;
+               field.setText(s);               
+               button ="";
+               s = "";
+               temp = "null";
+               summ = 0.0;
+               break;
+           case "-":
+               value = Double.parseDouble(button);
+               summ -= value;
+               s += summ;
+               field.setText(s);
+               button = "";
+               s = "";
+               temp = "null";
+               summ = 0.0;
+               break;
+        }
         }
     }
     class minusActionListener implements ActionListener{
