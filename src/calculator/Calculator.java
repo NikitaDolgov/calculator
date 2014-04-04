@@ -62,7 +62,7 @@ public class Calculator {
     JButton minus = new JButton("-");
     minus.addActionListener(new minusActionListener());
     JButton multiply = new JButton("*");
-    //multiply.addActionListener(new multiplyActionListener());
+    multiply.addActionListener(new multiplyActionListener());
     JButton divide = new JButton("/");
     //divide.addActionListener(new divideActionListener());
     JButton clean = new JButton("CE");
@@ -146,6 +146,15 @@ public class Calculator {
                button = "";
                s = "";
                break;
+           case "*":
+               temp = "-";
+               value = Double.parseDouble(button);
+               summ *= value;
+               s += summ;
+               field.setText(s);
+               button = "";
+               s = "";
+               break;
        }
        }
     }
@@ -178,6 +187,56 @@ public class Calculator {
                button = "";
                s = "";
                break;
+           case "*":
+               temp = "+";
+               value = Double.parseDouble(button);
+               summ *= value;
+               s += summ;
+               field.setText(s);
+               button = "";
+               s = "";
+               break;
+       }
+       }
+    }
+    public void multiply(){
+       if (button != ""){
+       switch (temp){
+           case "null":
+               temp = "*";
+               value = Double.parseDouble(button);
+               summ = value;
+               s += summ;
+               field.setText(s);
+               button = "";
+               s = "";
+               break;
+           case "*":
+               value = Double.parseDouble(button);
+               summ *= value;
+               s += summ;
+               field.setText(s);               
+               button ="";
+               s = "";
+               break;
+           case "-":
+               temp = "*";
+               value = Double.parseDouble(button);
+               summ -= value;
+               s += summ;
+               field.setText(s);
+               button = "";
+               s = "";
+               break;
+           case "+":
+               temp = "*";
+               value = Double.parseDouble(button);
+               summ += value;
+               s += summ;
+               field.setText(s);               
+               button ="";
+               s = "";
+               break;
        }
        }
     }
@@ -206,11 +265,20 @@ public class Calculator {
                temp = "null";
                summ = 0.0;
                break;
+           case "*":
+               value = Double.parseDouble(button);
+               summ *= value;
+               s += summ;
+               field.setText(s);               
+               button ="";
+               s = "";
+               temp = "null";
+               summ = 0.0;
+               break;
         }
         }
     }
-    class minusActionListener implements ActionListener{
-        
+    class minusActionListener implements ActionListener{        
         public void actionPerformed(ActionEvent event){
             minus();
         }
@@ -224,14 +292,17 @@ public class Calculator {
             button += a;
         }
     }
-    class plusActionListener implements ActionListener{
-        
+    class plusActionListener implements ActionListener{        
         public void actionPerformed(ActionEvent event){
             plus();
         }
     }
-    class equalsActionListener implements ActionListener{
-        
+    class multiplyActionListener implements ActionListener{        
+        public void actionPerformed(ActionEvent event){
+            multiply();
+        }
+    }
+    class equalsActionListener implements ActionListener{        
         public void actionPerformed(ActionEvent event){
             equal();
         }
