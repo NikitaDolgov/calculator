@@ -64,7 +64,7 @@ public class Calculator {
     JButton multiply = new JButton("*");
     multiply.addActionListener(new multiplyActionListener());
     JButton divide = new JButton("/");
-    //divide.addActionListener(new divideActionListener());
+    divide.addActionListener(new divideActionListener());
     JButton clean = new JButton("CE");
    // clean.addActionListener(new cleanActionListener());
     JButton sqrt = new JButton("√");
@@ -155,6 +155,15 @@ public class Calculator {
                button = "";
                s = "";
                break;
+           case "/":
+               temp = "-";
+               value = Double.parseDouble(button);
+               summ /= value;
+               s += summ;
+               field.setText(s);               
+               button ="";
+               s = "";
+               break;
        }
        }
     }
@@ -194,6 +203,15 @@ public class Calculator {
                s += summ;
                field.setText(s);
                button = "";
+               s = "";
+               break;
+           case "/":
+               temp = "+";
+               value = Double.parseDouble(button);
+               summ /= value;
+               s += summ;
+               field.setText(s);               
+               button ="";
                s = "";
                break;
        }
@@ -237,6 +255,65 @@ public class Calculator {
                button ="";
                s = "";
                break;
+           case "/":
+               temp = "*";
+               value = Double.parseDouble(button);
+               summ /= value;
+               s += summ;
+               field.setText(s);               
+               button ="";
+               s = "";
+               break;
+       }
+       }
+    }
+    public void divide(){
+        if (button != ""){
+       switch (temp){
+           case "null":
+               temp = "/";
+               value = Double.parseDouble(button);
+               summ = value;
+               s += summ;
+               field.setText(s);
+               button = "";
+               s = "";
+               break;
+           case "/":
+               value = Double.parseDouble(button);
+               summ /= value;
+               s += summ;
+               field.setText(s);               
+               button ="";
+               s = "";
+               break;
+           case "-":
+               temp = "/";
+               value = Double.parseDouble(button);
+               summ -= value;
+               s += summ;
+               field.setText(s);
+               button = "";
+               s = "";
+               break;
+           case "+":
+               temp = "/";
+               value = Double.parseDouble(button);
+               summ += value;
+               s += summ;
+               field.setText(s);               
+               button ="";
+               s = "";
+               break;
+           case "*":
+               temp = "/";
+               value = Double.parseDouble(button);
+               summ *= value;
+               s += summ;
+               field.setText(s);               
+               button ="";
+               s = "";
+               break;
        }
        }
     }
@@ -275,6 +352,16 @@ public class Calculator {
                temp = "null";
                summ = 0.0;
                break;
+           case "/":
+               value = Double.parseDouble(button);
+               summ /= value;
+               s += summ;
+               field.setText(s);               
+               button ="";
+               s = "";
+               temp = "null";
+               summ = 0.0;
+               break;
         }
         }
     }
@@ -300,6 +387,11 @@ public class Calculator {
     class multiplyActionListener implements ActionListener{        
         public void actionPerformed(ActionEvent event){
             multiply();
+        }
+    }
+    class divideActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            divide();
         }
     }
     class equalsActionListener implements ActionListener{        
