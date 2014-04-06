@@ -66,9 +66,9 @@ public class Calculator {
     JButton divide = new JButton("/");
     divide.addActionListener(new divideActionListener());
     JButton clean = new JButton("CE");
-   // clean.addActionListener(new cleanActionListener());
+    clean.addActionListener(new cleanActionListener());
     JButton sqrt = new JButton("√");
-   // sqrt.addActionListener(new sqrtActionListener());
+    sqrt.addActionListener(new sqrtActionListener());
     field = new JTextArea(1,20);
     field.setLineWrap(true);
     field.setEditable(false);
@@ -214,6 +214,9 @@ public class Calculator {
                button ="";
                s = "";
                break;
+           case "#":
+               temp = "+";
+               break;
        }
        }
     }
@@ -268,7 +271,7 @@ public class Calculator {
        }
     }
     public void divide(){
-        if (button != ""){
+       if (button != ""){
        switch (temp){
            case "null":
                temp = "/";
@@ -314,8 +317,74 @@ public class Calculator {
                button ="";
                s = "";
                break;
+           case "#":
+               temp = "/";               
+               break;
        }
        }
+    }
+    public void sqrt(){
+       if (button != ""){
+       switch (temp){
+           case "null":
+               temp = "null";
+               value = Double.parseDouble(button);
+               summ = Math.sqrt(value);
+               s += summ;
+               field.setText(s);
+               button = "";
+               s = "";
+               break;
+           case "-":
+               temp = "#";
+               value = Double.parseDouble(button);
+               value = Math.sqrt(value);
+               summ -= value;
+               s += summ;
+               field.setText(s);
+               button = "";
+               s = "";
+               break;
+           case "+":
+               temp = "#";
+               value = Double.parseDouble(button);
+               value = Math.sqrt(value);
+               summ += value;
+               s += summ;
+               field.setText(s);               
+               button ="";
+               s = "";
+               break;
+           case "*":
+               temp = "#";
+               value = Double.parseDouble(button);
+               value = Math.sqrt(value);
+               summ *= value;
+               s += summ;
+               field.setText(s);               
+               button ="";
+               s = "";
+               break;
+           case "/":
+               temp = "#";
+               value = Double.parseDouble(button);
+               value = Math.sqrt(value);
+               summ /= value;
+               s += summ;
+               field.setText(s);               
+               button ="";
+               s = "";
+               break;
+       }
+       }
+    }
+    public void clean(){
+        button = "";
+        s = "0";
+        field.setText(s);
+        s = "";
+        temp = "null";
+        summ = 0.0;
     }
     public void equal(){
         if (button != ""){
@@ -362,12 +431,23 @@ public class Calculator {
                temp = "null";
                summ = 0.0;
                break;
+           case "#":                              
+               button ="";
+               s = "";
+               temp = "null";
+               summ = 0.0;
+               break;
         }
         }
     }
     class minusActionListener implements ActionListener{        
         public void actionPerformed(ActionEvent event){
             minus();
+        }
+    }
+    class cleanActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            clean();
         }
     }
     class ButtonActionListener implements ActionListener{
@@ -383,10 +463,15 @@ public class Calculator {
         public void actionPerformed(ActionEvent event){
             plus();
         }
-    }
+    }    
     class multiplyActionListener implements ActionListener{        
         public void actionPerformed(ActionEvent event){
             multiply();
+        }
+    }
+    class sqrtActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            sqrt();
         }
     }
     class divideActionListener implements ActionListener{
