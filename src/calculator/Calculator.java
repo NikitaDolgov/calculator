@@ -15,7 +15,6 @@ import java.awt.event.*;
 
 /*
 Errors:
-Doesn't change the sign ( "+" "-" will be "+")
 
 */
 public class Calculator {
@@ -116,6 +115,7 @@ public class Calculator {
     frame.setVisible(true);
     frame.setResizable(false);
     frame.setLocation(200,200);
+    field.setText("0");
     }
     public void minus(){ 
         if (button != ""){
@@ -164,8 +164,8 @@ public class Calculator {
                button ="";
                s = "";
                break;
-       }
-       }
+       } 
+       } else {if (temp != "null") temp = "-"; }
     }
     public void plus(){
        if (button != ""){
@@ -218,7 +218,7 @@ public class Calculator {
                temp = "+";
                break;
        }
-       }
+       } else {if (temp != "null") temp = "+"; }
     }
     public void multiply(){
        if (button != ""){
@@ -268,7 +268,7 @@ public class Calculator {
                s = "";
                break;
        }
-       }
+       } else {if (temp != "null") temp = "*"; }
     }
     public void divide(){
        if (button != ""){
@@ -321,7 +321,7 @@ public class Calculator {
                temp = "/";               
                break;
        }
-       }
+       } else {if (temp != "null") temp = "/"; }
     }
     public void sqrt(){
        if (button != ""){
@@ -376,7 +376,7 @@ public class Calculator {
                s = "";
                break;
        }
-       }
+       } 
     }
     public void clean(){
         button = "";
