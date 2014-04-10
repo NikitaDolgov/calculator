@@ -164,6 +164,9 @@ public class Calculator {
                button ="";
                s = "";
                break;
+           case "#":
+               temp = "-";
+               break;
        } 
        } else {if (temp != "null") temp = "-"; }
     }
@@ -267,6 +270,9 @@ public class Calculator {
                button ="";
                s = "";
                break;
+           case "#":
+               temp = "*";
+               break;
        }
        } else {if (temp != "null") temp = "*"; }
     }
@@ -327,7 +333,7 @@ public class Calculator {
        if (button != ""){
        switch (temp){
            case "null":
-               temp = "null";
+               temp = "#";
                value = Double.parseDouble(button);
                summ = Math.sqrt(value);
                s += summ;
