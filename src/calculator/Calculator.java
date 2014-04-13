@@ -19,7 +19,7 @@ Errors:
 */
 public class Calculator {
     JTextArea field;
-    String button = "",s = "", temp = "null";
+    String button = "",s = "", temp = "null", c="";
     double value = 0.0, summ = 0.0;
     /**
      * @param args the command line arguments
@@ -116,7 +116,7 @@ public class Calculator {
     frame.setResizable(false);
     frame.setLocation(200,200);
     field.setText("0");
-    }
+    }   
     public void minus(){ 
         if (button != ""){
         switch (temp){
@@ -449,45 +449,57 @@ public class Calculator {
     class minusActionListener implements ActionListener{        
         public void actionPerformed(ActionEvent event){
             minus();
+            c="";
         }
     }
     class cleanActionListener implements ActionListener{
         public void actionPerformed(ActionEvent event){
             clean();
+            c="";
         }
     }
+    
     class ButtonActionListener implements ActionListener{
         String a;
+        
         ButtonActionListener(String q){
             a=q;
+           
         }
         public void actionPerformed(ActionEvent event){
             button += a;
+            c+=a;
+            field.setText(c);
         }
     }
     class plusActionListener implements ActionListener{        
         public void actionPerformed(ActionEvent event){
             plus();
+            c="";
         }
     }    
     class multiplyActionListener implements ActionListener{        
         public void actionPerformed(ActionEvent event){
             multiply();
+            c="";
         }
     }
     class sqrtActionListener implements ActionListener{
         public void actionPerformed(ActionEvent event){
             sqrt();
+            c="";
         }
     }
     class divideActionListener implements ActionListener{
         public void actionPerformed(ActionEvent event){
             divide();
+            c="";
         }
     }
     class equalsActionListener implements ActionListener{        
         public void actionPerformed(ActionEvent event){
             equal();
+            c="";
         }
     }
 }
